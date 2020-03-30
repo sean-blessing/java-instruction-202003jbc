@@ -7,13 +7,13 @@ public class GuessTheNumberApp {
 		System.out.println("Welcome to the Guess the Number game!");
 		Scanner sc = new Scanner(System.in);
 		String choice = "y";
-		
+
 		while (choice.equals("y")) {
 			//  - loop 1 - game
 			//  generage int rndNbr, initialize int count
 			int count = 0;
 			int rndNbr = (int)(Math.random()*100)+1;
-			System.out.println("the # = "+rndNbr);
+			//System.out.println("the # = "+rndNbr);
 			
 			//  Start Game Message
 			int guess = 0;
@@ -48,6 +48,7 @@ public class GuessTheNumberApp {
 			}
 			//  - loop 1 ends - user guesses the number
 			//  Display Results - final
+
 			String msg = "You got it in "+count+" tries!\n";
 			if (count <= 3) {
 				msg += "Great work you are a mathematical wizard!";
