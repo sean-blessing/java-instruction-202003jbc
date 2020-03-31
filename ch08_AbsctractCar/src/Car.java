@@ -1,10 +1,10 @@
 
-public class Car {
+public abstract class Car {
 	//instance variables
-	private String make;
-	private String model;
-	private int year;
-	private double mpg;
+	protected String make;
+	protected String model;
+	protected int year;
+	protected double mpg;
 	
 	// fully loaded constructor
 	public Car(String make, String model, int year, double mpg) {
@@ -19,8 +19,6 @@ public class Car {
 	public Car() {
 		super();
 	}
-
-
 
 	// getters/setters
 	public String getMake() {
@@ -51,5 +49,15 @@ public class Car {
 	public String toString() {
 		return "Car [make=" + make + ", model=" + model + ", year=" + year + ", mpg=" + mpg + "]";
 	}
+	
+	public abstract String getDisplayText();
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
