@@ -25,6 +25,8 @@ public class PrimitivesAndReferencesApp {
 		
 		changePrice(product1);
 		System.out.println(product1);
+		
+		System.out.println();
 
 	}
 	

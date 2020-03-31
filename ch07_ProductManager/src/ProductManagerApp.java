@@ -13,6 +13,7 @@ public class ProductManagerApp {
 		System.out.println("Price of p1 is "+p1.getPriceFormatted());
 		
 		Product p2 = new Product("MySQL", "Murach's MySQL", 54.50);
+		
 		System.out.println(p2);
 
 		System.out.println(p1);
