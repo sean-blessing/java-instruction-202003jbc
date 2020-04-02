@@ -1,7 +1,7 @@
 package business;
 import java.text.NumberFormat;
 
-public class Product implements Cloneable {
+public class Product implements Cloneable, Comparable {
 	// 1) define some instance variables
 	private String code;
 	private String description;
@@ -68,6 +68,14 @@ public class Product implements Cloneable {
 	protected Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		return super.clone();
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		// tell Java how to copare products - code
+		// compareTo needs to return either -1, 0, or 1
+		Product pdt = (Product)arg0;
+		return code.compareTo(pdt.getCode());
 	}
 	
 	

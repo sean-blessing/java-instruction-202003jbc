@@ -1,6 +1,8 @@
 package ui;
 
 import business.Product;
+import util.Console;
+
 
 public class ArraysApp {
 
@@ -57,6 +59,53 @@ public class ArraysApp {
 		for (int i=0; i < products.length; i++) {
 			System.out.println("product["+i+"]="+products[i]);
 		}
+		
+		System.out.println("compute the average of the numbers array..");
+		double sum = 0;
+		for (int i=0; i < numbers.length; i++) {
+			sum += numbers[i];
+		}
+		System.out.println("sum = "+sum);
+		double avg = sum / (double)numbers.length;
+		System.out.println("avg = "+avg);
+		
+		System.out.println("======================");
+		System.out.println("Find the product for a given code...");
+		String code = Console.getString("Enter code:  ");
+		// loop through the array to find the product
+		Product p = null;
+		for (int i = 0; i < products.length; i++) {
+			if (products[i]!=null) {
+				if (products[i].getCode().equalsIgnoreCase(code)) {
+					// this is the product we are looking for!!!
+					p = products[i];
+				}
+			}
+		}
+		System.out.println("Product is "+p);
+		
+		System.out.println("=====================");
+		System.out.println("find product at a position / index...");
+		int idx = Console.getInt("Enter index position to retrieve:  ");
+		Product pdt1 = products[idx];
+		System.out.println("product found at position "+idx+": "+pdt1);
+		
+		// enhanced for loop
+		// print each product in the array if its not null
+		for (Product pdt2: products) {
+			if (pdt2==null) {
+				System.out.println(" - Empty slot - ");
+			}
+			else {
+				System.out.println(pdt2);
+			}
+		}
+		
+		
+		
+		
+		
+		
 		
 		
 		
