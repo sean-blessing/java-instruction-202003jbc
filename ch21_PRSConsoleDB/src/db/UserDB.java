@@ -16,10 +16,45 @@ public class UserDB implements DAO<User> {
 		return conn;
 	}
 
+	public User login(String un, String pw) {
+		User u = null;
+		String sql = "SELECT * from User where username = ? and password = ?";
+		try (Connection conn = getConnection();
+			 PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, un);
+			ps.setString(2, pw);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				u = getUserFromResultSet(rs);
+			}
+			else {
+				// no user found for un, pw
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return u;
+	}
+
 	@Override
 	public User get(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		User u = null;
+		String sql = "SELECT * from User where id = ?";
+		try (Connection conn = getConnection();
+			 PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				u = getUserFromResultSet(rs);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return u;
 	}
 
 	@Override
@@ -31,17 +66,7 @@ public class UserDB implements DAO<User> {
 				ResultSet rs = ps.executeQuery()) {
 			// while there is a row in the rs
 			while (rs.next()) {
-				// int id = rs.getInt("id");
-				int id = rs.getInt(1);
-				String un = rs.getString(2);
-				String pw = rs.getString(3);
-				String fn = rs.getString(4);
-				String ln = rs.getString(5);
-				String pn = rs.getString(6);
-				String e = rs.getString(7);
-				boolean r = rs.getBoolean(8);
-				boolean a = rs.getBoolean(9);
-				User u = new User(id, un, pw, fn, ln, pn, e, r, a);
+				User u = getUserFromResultSet(rs);
 				users.add(u);
 			}
 		} catch (SQLException e) {
@@ -49,6 +74,21 @@ public class UserDB implements DAO<User> {
 			users = null;
 		}
 		return users;
+	}
+	
+	private User getUserFromResultSet(ResultSet rs) throws SQLException {
+		// int id = rs.getInt("id");
+		int id = rs.getInt(1);
+		String un = rs.getString(2);
+		String pw = rs.getString(3);
+		String fn = rs.getString(4);
+		String ln = rs.getString(5);
+		String pn = rs.getString(6);
+		String e = rs.getString(7);
+		boolean r = rs.getBoolean(8);
+		boolean a = rs.getBoolean(9);
+		User u = new User(id, un, pw, fn, ln, pn, e, r, a);
+		return u;
 	}
 
 	@Override
@@ -82,8 +122,25 @@ public class UserDB implements DAO<User> {
 
 	@Override
 	public boolean delete(User u) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean success = false;
+		String sql = "DELETE from User where id = ?";
+		try (Connection conn = getConnection(); 
+			 PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, u.getId());
+			ps.executeUpdate();
+			success = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return success;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 }
