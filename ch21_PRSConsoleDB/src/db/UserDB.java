@@ -76,6 +76,7 @@ public class UserDB implements DAO<User> {
 		return users;
 	}
 	
+	// This is a form of ORM - Object Relational Mapping
 	private User getUserFromResultSet(ResultSet rs) throws SQLException {
 		// int id = rs.getInt("id");
 		int id = rs.getInt(1);
